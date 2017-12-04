@@ -1,0 +1,17 @@
+[Unit]
+Description=OpenBSD Secure Shell server (chroot)
+After=network.target auditd.service
+ConditionPathExists=!/etc/ssh_chroot/sshd_not_to_be_run
+
+[Service]
+EnvironmentFile=-/etc/default/ssh_chroot
+ExecStart=/usr/sbin/sshd -D -f /etc/ssh_chroot/sshd_config $SSHD_OPTS
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+RestartPreventExitStatus=255
+Type=notify
+
+[Install]
+WantedBy=multi-user.target
+#Alias=sshd_chroot.service
