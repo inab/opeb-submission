@@ -2,19 +2,27 @@
 layout: default
 ---
 
-# User's workflow activity
-![](images/UserFlow.png)
+# User instructions
+## User workflow activity
+![user workflow activity](images/UserFlow.png)
 
-## Benchmarking event
+### Benchmarking event
 
-### New dataset
+#### New dataset
 
-## Web interface
+### Web interface
 
-## SFTP
+### SFTP
 
-### Sintaxis Check
+#### Sintaxis Check
 
-### Calculate Metrics
+#### Calculate Metrics
 
-### Unify metrics
+#### Unify metrics
+
+
+
+# Community instructions
+## Community
+### OpenEBench submission server internal behaviour
+![OpenEBench submission server internal behaviour](images/OpenEBench.InitialProposal.workflow.png)
