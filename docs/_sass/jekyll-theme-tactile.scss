@@ -174,12 +174,6 @@ a.button span {
  float: center;
  padding-left: 10px;
 }
-#view-on-github span {
-  background: transparent url(../images/octocat-icon.png) 12px 50% no-repeat;
-}
-#view-on-github {
-  margin-right: 0;
-}
 
 code, pre {
   margin-bottom: 30px;
@@ -371,9 +365,7 @@ footer a:hover {
     padding-top: 10px;
     padding-bottom: 10px;
   }
-  #downloads {
-    //margin-bottom: 25px;
-  }
+
   #download-zip, #download-tar-gz {
     display: inline-block;
   }
