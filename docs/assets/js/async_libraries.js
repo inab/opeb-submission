@@ -16,5 +16,5 @@ function loadStyleSheet(src, media=null){
 
 loadStyleSheet('https://fonts.googleapis.com/css?family=Roboto:500');
 loadStyleSheet("{{ '/assets/css/style.css?v=' | append: site.github.url | relative_url }}");
-loadStyleSheet("{{ '/assets/css/print.css' | append: site.github.url | relative_url }}}", 'print');
+loadStyleSheet("{{ '/assets/css/print.css' | append: site.github.url | relative_url }}", 'print');
 
