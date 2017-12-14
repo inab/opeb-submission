@@ -1,0 +1,42 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://vagrantcloud.com/search.
+  config.vm.box = "ubuntu/xenial64"
+
+  # Use vagrant-cachier plugin if exists for speed up the package management
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
+
+  # Use vagrant-vbguest plugin if exists for speed up the package management
+  if Vagrant.has_plugin?("vagrant-vbguest")
+    # set auto_update to false, if you do NOT want to check the correct
+    # additions version when booting this machine
+    config.vbguest.auto_update = false
+  end
+
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine. In the example below,
+  # accessing "localhost:8080" will access port 80 on the guest machine.
+  # NOTE: This will enable public access to the opened port
+  config.vm.network "forwarded_port", guest: 22, host: 8022
+  config.vm.network "forwarded_port", guest: 2222, host: 8222
+
+  # Copy provision folders to the VM
+  config.vm.provision "file", source: "installer", destination: "/tmp/installer"
+  config.vm.provision "file", source: "management", destination: "/tmp/management"
+  config.vm.provision "file", source: "tests", destination: "/tmp/tests"
+
+  # Run provision scripts from the VM
+  config.vm.provision "shell", inline: "apt install -y openssh-server 2>&1 > /dev/null"
+  config.vm.provision "shell", inline: "/tmp/installer/doInstall.sh"
+  config.vm.provision "shell", inline: "/tmp/tests/doInstall.sh"
+  config.vm.provision "shell", inline: "/tmp/tests/doTests.sh"
+end

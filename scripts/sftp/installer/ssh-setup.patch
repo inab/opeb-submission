@@ -1,8 +1,0 @@
-diff -Nru /etc/ssh.template/sshd_config /etc/ssh/sshd_config
---- /etc/ssh.template/sshd_config	2017-05-02 14:37:36.100000000 +0200
-+++ /etc/ssh/sshd_config	2017-11-29 18:40:55.068000000 +0100
-@@ -86,3 +86,4 @@
- # PAM authentication, then enable this but set PasswordAuthentication
- # and ChallengeResponseAuthentication to 'no'.
- UsePAM yes
-+DenyGroups submitters
