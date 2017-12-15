@@ -98,14 +98,11 @@ header h2 {
 
 .inner {
   margin: 50px;
+  text-align: center;
 }
 
 #container .inner img {
   max-width: 100%;
-}
-
-#downloads {
-  //margin-bottom: 40px;
 }
 
 a.button {
@@ -113,7 +110,6 @@ a.button {
   float: left;
   width: 100px;
   padding: 0px 8px 12px 8px;
-  //margin-right: 14px;
   font-size: 15px;
   font-weight: bold;
   line-height: 25px;
@@ -171,14 +167,14 @@ a.button span {
  background: transparent url(../../images/user_button_icon.png) 30px 50% no-repeat;
  background-size: 40px;
  float: center;
- padding-left: 33px;
+ padding-left: 0px;
 }
 
 #download-tar-gz span {
  background: transparent url(../../images/community_button_icon.png) 30px 50% no-repeat;
  background-size: 40px;
  float: center;
- padding-left: 10px;
+ padding-left: 0px;
 }
 
 code, pre {
@@ -332,7 +328,6 @@ footer {
   margin-top: 40px;
   font-size: 13px;
   color: #aaa;
-  background: transparent url('../images/hr.png') 0 0 no-repeat;
 }
 
 footer a {
@@ -383,7 +378,15 @@ footer a:hover {
 }
 
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
-@media only screen and (min-width: 480px) and (max-width: 767px) { }
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  #download-zip  {
+    margin-left: 0%;
+  }
+
+  #download-tar-gz  {
+    margin-right: 0%;
+  }
+}
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) {
