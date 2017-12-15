@@ -10,6 +10,9 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "ubuntu/xenial64"
 
+  # Remove defeault vagrant synced_folder binding
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+
   # Use vagrant-cachier plugin if exists for speed up the package management
   if Vagrant.has_plugin?("vagrant-cachier")
     config.cache.scope = :box
@@ -17,7 +20,7 @@ Vagrant.configure("2") do |config|
 
   # Use vagrant-vbguest plugin if exists for speed up the package management
   if Vagrant.has_plugin?("vagrant-vbguest")
-    # set auto_update to false, if you do NOT want to check the correct
+    # set auto_update to false, if you do not want to check the correct
     # additions version when booting this machine
     config.vbguest.auto_update = false
   end
@@ -29,14 +32,29 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 22, host: 8022
   config.vm.network "forwarded_port", guest: 2222, host: 8222
 
-  # Copy provision folders to the VM
+  # Copy provision folders to the guest machine
   config.vm.provision "file", source: "installer", destination: "/tmp/installer"
   config.vm.provision "file", source: "management", destination: "/tmp/management"
   config.vm.provision "file", source: "tests", destination: "/tmp/tests"
 
-  # Run provision scripts from the VM
-  config.vm.provision "shell", inline: "apt install -y openssh-server 2>&1 > /dev/null"
+  # Run provision scripts from the guest machine
+  config.vm.provision "shell", inline: "apt install -y openssh-server sshpass 2>&1 > /dev/null"
   config.vm.provision "shell", inline: "/tmp/installer/doInstall.sh"
-  config.vm.provision "shell", inline: "/tmp/tests/doInstall.sh"
+  config.vm.provision "shell", inline: "/tmp/tests/doInstall.sh 2>&1 > /dev/null"
+
+  # Run provision test from the guest machine
   config.vm.provision "shell", inline: "/tmp/tests/doTests.sh"
+
+  # Run SFTP test from the host machine
+  # Use vagrant-host-shell plugin if exists for speed up the package management
+  if Vagrant.has_plugin?("vagrant-host-shell")
+    config.vm.provision :host_shell do |host_shell|
+      host_shell.inline = <<-EOF
+      echo 'Running external SFTP tests...'
+      tests/host/submitter_sftp.tests.sh
+      EOF
+    end
+  else
+    puts "Add Gemfile with vagrant-host-shell installation"
+  end
 end

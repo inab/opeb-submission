@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 BASEDIR="$(dirname "$0")"
 case "$BASEDIR" in
@@ -14,7 +14,7 @@ esac
 # Submitters
 # All tests related to the submitters go here
 
-pushd "$BASEDIR" > /dev/null
+cd "$BASEDIR"
 echo "Running submitter tests..."
-./submitter_tests.sh
-popd > /dev/null
+./guest/submitter_tests.sh
+cd ..
