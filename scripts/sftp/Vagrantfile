@@ -38,7 +38,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "file", source: "tests", destination: "/tmp/tests"
 
   # Run provision scripts from the guest machine
-  config.vm.provision "shell", inline: "apt install -y openssh-server sshpass 2>&1 > /dev/null"
+  config.vm.provision "shell", inline: "apt update && apt install -y openssh-server sshpass 2>&1 > /dev/null"
   config.vm.provision "shell", inline: "/tmp/installer/doInstall.sh"
   config.vm.provision "shell", inline: "/tmp/tests/doInstall.sh 2>&1 > /dev/null"
 
@@ -55,6 +55,8 @@ Vagrant.configure("2") do |config|
       EOF
     end
   else
-    puts "Add Gemfile with vagrant-host-shell installation"
+    STDERR.puts "\e[31m\e[1mvagrant-host-shell is required for running SFTP tests"
+    STDERR.puts "install with: 'bundler install' "
+    STDERR.puts "and run with: 'bundler exec vagrant'\e[0m"
   end
 end
