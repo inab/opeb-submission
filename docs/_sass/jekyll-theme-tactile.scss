@@ -163,13 +163,14 @@ a.button span {
 }
 
 #download-zip span {
- background: transparent url(../../images/user.png) 30px 50% no-repeat;
+ background: transparent url(../../images/user_button_icon.png) 30px 50% no-repeat;
  background-size: 40px;
  float: center;
- padding-left: 28px;
+ padding-left: 33px;
 }
+
 #download-tar-gz span {
- background: transparent url(../../images/community.png) 30px 50% no-repeat;
+ background: transparent url(../../images/community_button_icon.png) 30px 50% no-repeat;
  background-size: 40px;
  float: center;
  padding-left: 10px;
