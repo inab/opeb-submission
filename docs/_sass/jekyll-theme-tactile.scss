@@ -97,8 +97,7 @@ header h2 {
 }
 
 .inner {
-  width: 620px;
-  margin: 0 auto;
+  margin: 50px;
 }
 
 #container .inner img {
@@ -114,7 +113,7 @@ a.button {
   float: left;
   width: 100px;
   padding: 0px 8px 12px 8px;
-  margin-right: 14px;
+  //margin-right: 14px;
   font-size: 15px;
   font-weight: bold;
   line-height: 25px;
@@ -158,8 +157,14 @@ a.button span {
   height: 60px;
 }
 
+#download-zip  {
+  float: left;
+  margin-left: 30%;
+}
+
 #download-tar-gz  {
   float: right;
+  margin-right: 30%;
 }
 
 #download-zip span {
@@ -381,4 +386,12 @@ footer a:hover {
 @media only screen and (min-width: 480px) and (max-width: 767px) { }
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
-@media only screen and (max-width: 479px) { }
+@media only screen and (max-width: 479px) {
+  #download-zip  {
+    margin-left: 0%;
+  }
+
+  #download-tar-gz  {
+    margin-right: 0%;
+  }
+}
