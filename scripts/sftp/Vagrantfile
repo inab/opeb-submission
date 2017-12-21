@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
     config.vm.provision :host_shell do |host_shell|
       host_shell.inline = <<-EOF
       echo 'Running external SFTP tests...'
-      tests/host/submitter_sftp.tests.sh
+      tests/host/submitter_sftp_tests.sh
       EOF
     end
   else
