@@ -4,3 +4,4 @@ github: [metadata]
 show_downloads: true
 google_analytics: UA-110468838-1
 theme: jekyll-theme-tactile
+exclude: [vendor]
