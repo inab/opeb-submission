@@ -87,6 +87,14 @@ header h2 {
   letter-spacing: -1px;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+}
+
+.image-center {
+  text-align: center;
+}
+
 .text-center {
   text-align: center;
 }
@@ -98,7 +106,7 @@ header h2 {
 
 .inner {
   margin: 50px;
-  text-align: center;
+  //text-align: center;
 }
 
 #container .inner img {
@@ -328,6 +336,7 @@ footer {
   margin-top: 40px;
   font-size: 13px;
   color: #aaa;
+  text-align: center;
 }
 
 footer a {
@@ -346,7 +355,7 @@ footer a:hover {
   content: '.';
   }
 
-.clearfix {display: inline-block}
+.clearfix {display: inline-block; text-align: center}
 * html .clearfix {height: 1%;}
 //.clearfix {display: block; padding-left: 150px; padding-right: 160px;}
 .clearfix {display: block; }

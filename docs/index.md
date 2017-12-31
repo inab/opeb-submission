@@ -20,8 +20,9 @@ As it is identified in [doi.org:10.1101/181677](http://dx.doi.org/10.1101/181677
 # User instructions
 
 ## User workflow activity
-![user workflow activity](images/UserFlow.png)
 
+{: .image-center}
+![user workflow activity](images/UserFlow.png)
 ### Benchmarking event
 
 #### New dataset
@@ -41,4 +42,6 @@ As it is identified in [doi.org:10.1101/181677](http://dx.doi.org/10.1101/181677
 # Community instructions
 ## Community
 ### OpenEBench submission server internal behaviour
+
+{: .image-center}
 ![OpenEBench submission server internal behaviour](images/OpenEBench.InitialProposal.workflow.png)
