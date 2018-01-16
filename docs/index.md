@@ -1,8 +1,9 @@
 ---
 layout: default
+title: About
+description: About
 ---
 
-# Introduction
 As it is identified in [doi.org:10.1101/181677](http://dx.doi.org/10.1101/181677), scientific communities try to speed up the advancements in their areas through benchmark and community challenges. In order to reach these goals, the coordinators of the community must provide:
 
 1. An standardization for the datasets, a set of good practices and guidelines.
@@ -17,31 +18,3 @@ As it is identified in [doi.org:10.1101/181677](http://dx.doi.org/10.1101/181677
 
 6. A way to share the computed metrics of the results obtained from all the participants.
 
-# User instructions
-
-## User workflow activity
-
-{: .image-center}
-![user workflow activity](images/UserFlow.png)
-### Benchmarking event
-
-#### New dataset
-
-### Web interface
-
-### SFTP
-
-#### Sintaxis Check
-
-#### Calculate Metrics
-
-#### Unify metrics
-
-
-
-# Community instructions
-## Community
-### OpenEBench submission server internal behaviour
-
-{: .image-center}
-![OpenEBench submission server internal behaviour](images/OpenEBench.InitialProposal.workflow.png)

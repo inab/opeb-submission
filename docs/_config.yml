@@ -1,7 +1,52 @@
-title: OpenEBench submission protocol
-description: Description of OpenEBench submission server, and instructions to submit results to be assessed
-github: [metadata]
-show_downloads: true
-google_analytics: UA-110468838-1
-theme: jekyll-theme-tactile
+# General settings
+# Exclude vendor bundler folder
 exclude: [vendor]
+# Use github metadata
+github: [metadata]
+# Track google analytics
+google_analytics: UA-110468838-1
+# Add sections
+include: ['_sections']
+
+# Site settings
+title: OpenEBench submission protocol
+description: "Description of OpenEBench submission server, and instructions to submit results to be assessed"
+url: "https://inab.github.io/opeb-submission/"
+ogimage: "img/default-ogimage.png"
+author:
+  name: "Miguel Madrid Mencía"
+  email: "miguel.madrid@bsc.es"
+  #url: "https://thereviewindex.com"
+
+
+# Build settings
+#baseurl: /blog # Change this to your relative path (ex: /blog/), or leave just a /
+baseurl: # Change this to your relative path (ex: /blog/), or leave just a /
+markdown: kramdown
+source: .
+destination: ./_site
+permalink: /:title
+paginate: 8
+paginate_path: /page:num/
+
+# Default values
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+
+# Custom variables
+version: "1.0.0"
+
+# Options
+custom_header: false
+custom_nav_footer: false
+reverse: false
