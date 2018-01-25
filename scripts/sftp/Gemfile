@@ -1,9 +1,11 @@
 source 'https://rubygems.org'
 
+ruby '~>2.4.3' # vagrant doesn't work by now with ruby-2.5.0
 group :development do
   gem "vagrant", git: "https://github.com/hashicorp/vagrant", :tag => "v2.0.1"
 end
 
 group :plugins do
   gem "vagrant-host-shell"
+  gem "vagrant-vbguest"
 end

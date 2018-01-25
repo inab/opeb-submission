@@ -49,6 +49,7 @@ GEM
     logging (2.2.2)
       little-plugger (~> 1.1)
       multi_json (~> 1.10)
+    micromachine (2.0.0)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
@@ -76,6 +77,10 @@ GEM
       unf_ext
     unf_ext (0.0.7.4)
     vagrant-host-shell (0.0.4)
+    vagrant-vbguest (0.15.1)
+      i18n
+      log4r
+      micromachine (~> 2.0.0)
     wdm (0.1.1)
     winrm (2.2.3)
       builder (>= 2.1.2)
@@ -101,6 +106,10 @@ PLATFORMS
 DEPENDENCIES
   vagrant!
   vagrant-host-shell
+  vagrant-vbguest
+
+RUBY VERSION
+   ruby 2.4.3p205
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
