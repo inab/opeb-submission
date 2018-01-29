@@ -43,7 +43,7 @@ In order to test this proof of concept, you only have to follow next script:
 
   ```bash
   mkdir -p /tmp/input /tmp/canonical_input /tmp/metrics /tmp/consolidated_metrics
-  mkdir bzip2 -9c /etc/passwd > /tmp/input/test_input.bz2
+  bzip2 -9c /etc/passwd > /tmp/input/test_input.bz2
   ```
 
 3. Check the input, obtaining it in its canonical representation (in this case, it translates from bzip2 to gzip format):
