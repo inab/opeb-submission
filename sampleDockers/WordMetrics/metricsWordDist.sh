@@ -11,7 +11,7 @@ if [ $# = 3 ] ; then
 	if [ $? = 0 ] ; then
 		cat<<EOF > "$output"
 {
-	"id": "$(basename "$input")",
+	"id": "$(gunzip -c "$input" | sha256sum -b - | cut -f 1 -d ' ')",
 	"metrics": [
 		{
 			"type": "worddist",

@@ -6,7 +6,8 @@ LABEL	description="Sample input ids extractor" vendor="BSC-CNS" version="0.1" ma
 
 # First, install all the dependencies needed by the input id extraction procedure
 # In this case, it installs the only program it needs
-RUN	apk update && apk add coreutils
+# Bash is installed for systems like nextflow
+RUN	apk update && apk add coreutils bash
 
 
 # Now, we get the input ids extraction program in some way (copying, git clone, etc...)

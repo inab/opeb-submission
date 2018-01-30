@@ -5,7 +5,7 @@ if [ $# = 2 ] ; then
 	output="$2"
 	cat<<EOF > "$output"
 [
-	"$(basename "$input")"
+	"$(gunzip -c "$input" | sha256sum -b - | cut -f 1 -d ' ')"
 ]
 EOF
 	exit $?

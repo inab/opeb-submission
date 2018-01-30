@@ -7,7 +7,8 @@ LABEL	description="Sample input validator" vendor="BSC-CNS" version="0.1" mainta
 # First, install all the dependencies needed by the input checking procedure
 # As this sample checks whether the file is a valid gzip, it installs
 # the three programs it needs
-RUN	apk update && apk add gzip bzip2 file
+# Bash is installed for systems like nextflow
+RUN	apk update && apk add gzip bzip2 file bash
 
 
 # Now, we get the validation program in some way (copying, git clone, etc...)

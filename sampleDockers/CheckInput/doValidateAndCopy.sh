@@ -4,7 +4,7 @@ if [ $# = 2 ] ; then
 	input="$1"
 	output="$2"
 	if [ -f "$input" -a -r "$input" ] ; then
-		case "$(file "$input")" in
+		case "$(file -L "$input")" in
 			*\ gzip\ compressed*)
 				# As gzip is the canonical format for this
 				# example, we only have to copy it
