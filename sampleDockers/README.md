@@ -57,7 +57,7 @@ In order to test this proof of concept, you only have to follow next script:
       /input/test_input.bz2  /output/canonical_input.gz
   ```
 
-4. Optional, you can get the identifiers file (in this case, it is a naïve function):
+4. Optional, you can get the identifiers file (in this case, it computes the sha256 of the uncompressed content):
 
   ```bash
   docker run --rm -ti \
