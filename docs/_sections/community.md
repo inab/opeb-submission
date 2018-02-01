@@ -9,7 +9,7 @@ Communities that aim to integrate with our pipeline for benchmarking should prov
 
 ### Community workflow activity
 
-![community workflow activity](../img/opeb-submission/community.png)
+![community workflow activity](../img/community.png)
 
 ### The Community has to provide
 

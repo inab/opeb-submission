@@ -7,4 +7,4 @@ description: Users instructions
 
 ### User workflow activity
 
-![user workflow activity](../img/opeb-submission/UserFlow.png)
+![user workflow activity](../img/user.png)
