@@ -1,3 +1,5 @@
+
+
 ---
 layout: page
 title: Community
@@ -5,9 +7,7 @@ description: Community instructions
 ---
 ## Community instructions
 
-Communities that aim to integrate with our pipeline for benchmarking should provide
-several docker images. We provide examples of these docker images using toy benchmarks,
-which are available under the repository folder 'sampleDockers'.
+Communities that aim to integrate with our pipeline for benchmarking should provide several information and docker images. We provide examples of these docker images using toy benchmarks, which are available under the repository folder 'sampleDockers'.
 
 ### Community workflow activity
 
@@ -15,50 +15,85 @@ which are available under the repository folder 'sampleDockers'.
 
 ### The Community has to provide
 
-* An __input data validation docker__: This docker will check the syntax of the submitted 
-  results from users. If the community allows input in more than one format, this docker image
-  has to translate this input file to a canonical format.
-  The docker image may throw an Error Condition, which is shown as 'Error Condition #1' in the
-  upper graph.
-  This Error Condition is thrown in case file format is not allowed or recognized,
-  file is corrupted or it could not be translated to the canonical format.
+* __Specification of the workflow__
+  * __Query Standard.__ The community must provide the convention of the query datasets that will be sent to the participants.
+
+  * __Reference Dataset Standard.__ Some benchmarking events require to set up reference datasets, like specific versions of databases available to use, so the obtained results from all the participants are comparable.
+
+  * __Result standards.__ The participants must provide the results in one of the accepted standards established by the community.
+The community must define at least one canonical format.
+
+  * __Mapping of error codes.__
+When one of the dockers fails, it should produce a UNIX exit code different from 0. When a docker image fails, this code will be stored to the database along with the STDERR output. 
+It is responsibility of the community to provide useful information regarding these errors, so their users are able to understand the problems found.
+Communities are compelled to define a structured error format, shared by all the used dockers.
+
+* An __input data validation docker__: This docker will check the syntax of the submitted results from users. If the community allows input in more than one format, this docker image has to translate this input file to the canonical format. This docker is responsible of checking common issues as format is not allowed or recognized, file is corrupted or it could not be translated to the canonical format.
+
+  *It is responsibility of the community to provide useful information regarding these errors, so their users are able to understand the problems found.*
 
   * Input: Original User Input.
-  * Output: User Input in canonical format or error message.
-  * Output Schema: <!--- TODO --->
+  * Output: User Input in canonical format or error code and STDERR error message.
 
-* An __input ids extraction docker__: This docker will extract ids from the canonical format.
-  The output of this docker should be a file in JSON format, containing a list of the extracted ids.
-  Later, a check that is done outside the docker image will compare this extracted ids with the
-  benchmark event ids.
-  This check may throw the 'Error Condition #2' if there is no perfect match between the 
-  two lists of ids. This may happen if the user has more or less ids than the benchmark
-  requires, any of the ids provided by the user does not match with the event list of ids, 
-  or a repeated id is provided.
-  *This check is not performed by the docker container*
+* A __query IDs extraction docker__: This docker will extract IDs from the input sent to the participants, and it is run only once per test event.
+  The output of this docker should be a file in JSON format, containing a list of objects with the next structure:
+
+  * *Input*: Query that will be sent to participants
+  * *Output*: JSON containing all the IDs available in the Query.
+  * *Schema*: 
+	```json
+	{
+		"testEventId": "anEventId",
+		"queryIds": [
+			"ID-1",
+			"ID-2",
+			"ID-3",
+			...
+		]
+	}
+	```
+* A __result IDs extraction docker__: This docker will extract IDs from the canonical format. The output of this docker should be a file in JSON format, containing a list of identifiers and the testEvent ID. These identifiers should be a subset of the Query IDs of the testEvent.
+These IDs will be compared to the Query Dataset an report an error if there are IDs that are not present on the Query dataset.
+
+  * *Input*: User Input in canonical format.
+  * *Output*: JSON list containing IDs.
+  * *Schema*:
+	```json
+	{
+		"testEventId": "anEventId",
+		"resultIds": [
+			"ID-1",
+			"ID-3"
+		]
+	}
+	```
+
+* One or more __metrics computation dockers__ : These docker images should calculate the statistics based on the user input in canonical format and reference data. Each docker should produce a statistic. 
   
-  * Input: User Input in canonical format.
-  * Output: JSON list containing IDs.
-  * Output Schema: <!--- TODO --->
+  * *Input*:
+    * User Input in canonical format.
+    * Reference data.
+    * Query IDs.
+    * User Input IDs.
+  * *Output*: Statistic calculated. 
 
-* One or more __metrics computation dockers__ : These docker images should calculate the statistics
-  based on the content. Each docker produces a statistic in JSON format. 
-  
-  * Input: User Input in canonical format.
-  * Output: JSON file containing metric calculated.
+  *It is responsibility of the community to provide a useful output.*
 
-* One __metrics consolidation docker__ : This docker image will accept all the statistics calculated
-  by the previous dockers and unify them in a single JSON file. This allows to post-process them,
-  allowing to calculate secondary statistics, that need previous statistics to be calculated.
+* One __metrics consolidation docker__ : This docker is a secondary docker that will receive all previous metrics as input. This allows to perform some post-processing of the statistics, or secondary statistics that may need to use previous statistics.
 
-  This JSON is the result of the current workflow and will be stores 
-  
-  * Input: JSON files containing metrics calculated.
-  * Output: JSON file containing unified metrics and, if necessary, secondary metrics.
-  * Output Schema: <!--- TODO --->
+ Some communities may want to apply some *penalization* in case the user has not provided results for all the entries in the Query Dataset, this is the recommended place to perform those penalizations.
+*This container is not mandatory.* 
+
+  * *Input*: 
+    * User Input in canonical format.
+    * Output from previous statistics calculated. 
+    * Reference data. 
+    * Query IDs.
+    * User Input IDs.
+  * Output: Final statistic. 
+	*It is responsibility of the community to provide a useful output.*
 
 <!--- TODO
-### How to upload the dockers
+### How to upload to the platform.
 --->
-
 
