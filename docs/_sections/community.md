@@ -1,5 +1,3 @@
-
-
 ---
 layout: page
 title: Community
@@ -24,7 +22,7 @@ Communities that aim to integrate with our pipeline for benchmarking should prov
 The community must define at least one canonical format.
 
   * __Mapping of error codes.__
-When one of the dockers fails, it should produce a UNIX exit code different from 0. When a docker image fails, this code will be stored to the database along with the STDERR output. 
+When one of the dockers fails, it should produce a UNIX exit code different from 0. When a docker image fails, this code will be stored to the database along with the STDERR output.
 It is responsibility of the community to provide useful information regarding these errors, so their users are able to understand the problems found.
 Communities are compelled to define a structured error format, shared by all the used dockers.
 
@@ -40,7 +38,7 @@ Communities are compelled to define a structured error format, shared by all the
 
   * *Input*: Query that will be sent to participants
   * *Output*: JSON containing all the IDs available in the Query.
-  * *Schema*: 
+  * *Schema*:
 	```json
 	{
 		"testEventId": "anEventId",
@@ -68,29 +66,29 @@ These IDs will be compared to the Query Dataset an report an error if there are 
 	}
 	```
 
-* One or more __metrics computation dockers__ : These docker images should calculate the statistics based on the user input in canonical format and reference data. Each docker should produce a statistic. 
-  
+* One or more __metrics computation dockers__ : These docker images should calculate the statistics based on the user input in canonical format and reference data. Each docker should produce a statistic.
+
   * *Input*:
     * User Input in canonical format.
     * Reference data.
     * Query IDs.
     * User Input IDs.
-  * *Output*: Statistic calculated. 
+  * *Output*: Statistic calculated.
 
   *It is responsibility of the community to provide a useful output.*
 
 * One __metrics consolidation docker__ : This docker is a secondary docker that will receive all previous metrics as input. This allows to perform some post-processing of the statistics, or secondary statistics that may need to use previous statistics.
 
  Some communities may want to apply some *penalization* in case the user has not provided results for all the entries in the Query Dataset, this is the recommended place to perform those penalizations.
-*This container is not mandatory.* 
+*This container is not mandatory.*
 
-  * *Input*: 
+  * *Input*:
     * User Input in canonical format.
-    * Output from previous statistics calculated. 
-    * Reference data. 
+    * Output from previous statistics calculated.
+    * Reference data.
     * Query IDs.
     * User Input IDs.
-  * Output: Final statistic. 
+  * Output: Final statistic.
 	*It is responsibility of the community to provide a useful output.*
 
 <!--- TODO
