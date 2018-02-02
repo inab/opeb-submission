@@ -1,14 +1,6 @@
 # <https://inab.github.io/opeb-submission/>
 
 ## Repository's tree view
-1. [Diagrams](#diagrams)
-2. [Docs](#docs)
-3. [SampleDockers](#sampledockers)
-4. [Scripts](#sampledockers)
-  4.1 [SFTP](#sftp)
-  4.2 [Tests](#tests)
-  4.3 [VM](#vm)
-
 ```
 .
 ├── diagrams
@@ -25,6 +17,14 @@
     ├── tests
     └── vm
 ```
+1. [Diagrams](#diagrams)
+2. [Docs](#docs)
+3. [SampleDockers](#sampledockers)
+4. [Scripts](#sampledockers)
+    - [SFTP](#sftp)
+    - [Tests](#tests)
+    - [VM](#vm)
+
 
 ## Diagrams
 Community and User workflow diagrams in graphml format
