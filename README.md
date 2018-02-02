@@ -5,11 +5,8 @@
 2. [Docs](#docs)
 3. [SampleDockers](#sampledockers)
 4. [Scripts](#sampledockers)
-
   4.1 [SFTP](#sftp)
-
   4.2 [Tests](#tests)
-
   4.3 [VM](#vm)
 
 ```
