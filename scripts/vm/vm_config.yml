@@ -1,9 +1,9 @@
 :service_flags:
-  :sftp: false
-  :tus: false
+  :sftp: true
+  :tus: true
   :nextflow: true
 :test_flags:
-  :sftp: false
+  :sftp: true
   :tus: true
   :nextflow: true
 

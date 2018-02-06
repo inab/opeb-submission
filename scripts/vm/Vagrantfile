@@ -44,14 +44,13 @@ Vagrant.configure('2') do |config|
   config.vm.network 'forwarded_port', guest: 1080, host: 8080
 
   # Copy provision folders to the guest machine
-  config.vm.provision 'file', source: '../sftp/installer',  destination: '/tmp/installer'
-  config.vm.provision 'file', source: '../sftp/management', destination: '/tmp/management'
-  config.vm.provision 'file', source: '../tests',      destination: '/tmp/tests'
+  config.vm.provision 'file', source: '../sftp/',  destination: '/tmp/sftp'
+  config.vm.provision 'file', source: '../tests', destination: '/tmp/tests'
 
   # Run provision scripts from the guest machine
   if vm_config[:service_flags][:sftp]
     config.vm.provision 'shell', inline: 'apt update && apt install -y openssh-server sshpass 2>&1 > /dev/null'
-    config.vm.provision 'shell', inline: '/tmp/installer/doInstall.sh'
+    config.vm.provision 'shell', inline: '/tmp/sftp/installer/doInstall.sh'
   end
 
   if vm_config[:test_flags].values.any?
@@ -83,7 +82,10 @@ Vagrant.configure('2') do |config|
   # Run provision test from the guest machine
 
   if vm_config[:test_flags][:sftp]
-    config.vm.provision 'shell', inline: '/tmp/tests/guest/submitter/submitter_tests.sh'
+    config.vm.provision 'shell', inline: <<-EOF
+    cd /tmp/tests/guest/submitter
+    ./submitter_tests.sh
+    EOF
   end
 
   # Run SFTP test from the host machine
@@ -93,10 +95,13 @@ Vagrant.configure('2') do |config|
     if Vagrant.has_plugin?('vagrant-host-shell')
       config.vm.provision :host_shell do |host_shell|
         host_shell.inline = <<-EOF
-      echo 'Running external SFTP tests...'
-      tests/host/submitter_sftp_tests.sh
+        echo 'Running external SFTP tests...'
+        ../tests/host/submitter_sftp_tests.sh
         EOF
-        config.vm.provision 'shell', inline: '/tmp/tests/guest/submitter/submitter_tests_after_sftp.sh'
+        config.vm.provision 'shell', inline: <<-EOF
+        cd /tmp/tests/guest/submitter
+        ./submitter_tests_after_sftp.sh
+        EOF
       end
     else
       STDERR.puts "\e[31m\e[1mvagrant-host-shell is required for running SFTP tests"
@@ -107,6 +112,9 @@ Vagrant.configure('2') do |config|
 
 
   if vm_config[:test_flags][:nextflow]
-    config.vm.provision 'shell', inline: '/tmp/tests/guest/nextflow/nextflow_tests.sh'
+    config.vm.provision 'shell', inline: <<-EOF
+    cd /tmp/tests/guest/nextflow
+    ./nextflow_tests.sh
+    EOF
   end
 end
