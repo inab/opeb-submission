@@ -7,13 +7,13 @@ if [ $# = 3 ] ; then
 	cat<<EOF > "$output"
 {
 	"testEventId": "$testEventId",
-	"resultIds": [
-		"$(gunzip -c "$input" | sha256sum -b - | cut -f 1 -d ' ')"
+	"queryIds": [
+		"$(sha256sum -b "$input" | cut -f 1 -d ' ')"
 	]
 }
 EOF
 	exit $?
 else
-	echo "Usage: $0 {testEventId} {input} {resultsIdsFile}" 1>&2
+	echo "Usage: $0 {testEventId} {input} {queryIdsFile}" 1>&2
 	exit 1
 fi

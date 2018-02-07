@@ -36,7 +36,7 @@ Communities are compelled to define a structured error format, shared by all the
 * A __query IDs extraction docker__: This docker will extract IDs from the query sent to the participants, and it is run only once per test event.
   The output of this docker should be a file in JSON format, containing a list of objects with the next structure:
 
-  * *Input*: Query that will be sent to participants
+  * *Input*: Test event identifier, and query that will be sent to participants
   * *Output*: JSON containing all the IDs available in the Query.
   * *Schema*:
 	```json
@@ -53,7 +53,7 @@ Communities are compelled to define a structured error format, shared by all the
 * A __result IDs extraction docker__: This docker will extract IDs from the canonical format. The output of this docker should be a file in JSON format, containing a list of identifiers and the testEvent ID. These identifiers should be a subset of the Query IDs of the testEvent.
 These IDs will be compared to the Query Dataset an report an error if there are IDs that are not present on the Query dataset.
 
-  * *Input*: Participant results in canonical format.
+  * *Input*: Test event identifier, and participant results in canonical format.
   * *Output*: JSON list containing IDs.
   * *Schema*:
 	```json
@@ -79,7 +79,7 @@ These IDs will be compared to the Query Dataset an report an error if there are 
 
 * One __metrics consolidation docker__ : This docker is a secondary docker that will receive all previous metrics as input. This allows to perform some post-processing of the statistics, or secondary statistics that may need to use previous statistics.
 
- Some communities may want to apply some *penalization* in case the user has not provided results for all the entries in the Query Dataset, this is the recommended place to perform those penalizations.
+ Some communities may want to apply some *penalization* in case the participant has not provided results for all the entries in the Query Dataset, this is the recommended place to perform those penalizations.
 *This container is not mandatory.*
 
   * *Input*:
