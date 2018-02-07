@@ -52,9 +52,9 @@ process checkResuls {
 /*
 * The instance generated from this docker file knows how to extract input ids from their canonical formats.
 */
-process getIds {
+process getResultsIds {
 
-  container 'opeb-submission/sample-getids'
+  container 'opeb-submission/sample-getiresultsids'
 
   publishDir 'nextflow_working_directory', mode: 'copy', overwrite: true
 
@@ -65,7 +65,7 @@ process getIds {
   file input_ids_json
 
   """
-  getIds.sh $canonical_input_gz input_ids_json
+  getResultsIds.sh $canonical_input_gz input_ids_json
   """
 
 }

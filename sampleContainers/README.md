@@ -31,7 +31,7 @@ In order to test this proof of concept, you only have to follow next script:
 
   ```bash
   docker build -t opeb-submission/sample-checkresults:latest CheckResults
-  docker build -t opeb-submission/sample-getids:latest GetIds
+  docker build -t opeb-submission/sample-getresultsids:latest GetResultsIds
   docker build -t opeb-submission/sample-linemetrics:latest LineMetrics
   docker build -t opeb-submission/sample-wordmetrics:latest WordMetrics
   docker build -t opeb-submission/sample-consolidate:latest ConsolidateMetrics
@@ -64,7 +64,7 @@ In order to test this proof of concept, you only have to follow next script:
       -v /tmp/canonical_input:/input:ro \
       -v /tmp/canonical_input:/output \
       -u $UID \
-      opeb-submission/sample-getids \
+      opeb-submission/sample-getresultsids \
       /input/canonical_input.gz /output/input_ids.json
   ```
 

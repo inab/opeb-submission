@@ -10,7 +10,7 @@ Documentation available <https://inab.github.io/opeb-submission/>
 ├── sampleContainers
 │   ├── CheckResults
 │   ├── ConsolidateMetrics
-│   ├── GetIds
+│   ├── GetResultsIds
 │   ├── LineMetrics
 │   ├── NextFlowPipeline
 │   └── WordMetrics
