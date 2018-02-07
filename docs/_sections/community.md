@@ -53,7 +53,7 @@ Communities are compelled to define a structured error format, shared by all the
 * A __result IDs extraction docker__: This docker will extract IDs from the canonical format. The output of this docker should be a file in JSON format, containing a list of identifiers and the testEvent ID. These identifiers should be a subset of the Query IDs of the testEvent.
 These IDs will be compared to the Query Dataset an report an error if there are IDs that are not present on the Query dataset.
 
-  * *Input*: User Input in canonical format.
+  * *Input*: Participant results in canonical format.
   * *Output*: JSON list containing IDs.
   * *Schema*:
 	```json
@@ -83,11 +83,11 @@ These IDs will be compared to the Query Dataset an report an error if there are 
 *This container is not mandatory.*
 
   * *Input*:
-    * User Input in canonical format.
+    * Participant results in canonical format.
     * Output from previous statistics calculated.
     * Reference data.
     * Query IDs.
-    * User Input IDs.
+    * Results IDs.
   * Output: Final statistic.
 	*It is responsibility of the community to provide a useful output.*
 
