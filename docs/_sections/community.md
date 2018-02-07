@@ -66,13 +66,13 @@ These IDs will be compared to the Query Dataset an report an error if there are 
 	}
 	```
 
-* One or more __metrics computation dockers__ : These docker images should calculate the statistics based on the user input in canonical format and reference data. Each docker should produce a statistic.
+* One or more __metrics computation dockers__ : These docker images should calculate the statistics based on the participant results in canonical format and reference data. Each docker should produce a statistic.
 
   * *Input*:
-    * User Input in canonical format.
+    * Participant results in canonical format.
     * Reference data.
     * Query IDs.
-    * User Input IDs.
+    * Results IDs.
   * *Output*: Statistic calculated.
 
   *It is responsibility of the community to provide a useful output.*
