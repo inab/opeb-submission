@@ -8,7 +8,7 @@ Documentation available <https://inab.github.io/opeb-submission/>
 ├── diagrams
 ├── docs
 ├── sampleContainers
-│   ├── CheckInput
+│   ├── CheckResults
 │   ├── ConsolidateMetrics
 │   ├── GetIds
 │   ├── LineMetrics

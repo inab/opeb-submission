@@ -11,7 +11,7 @@ if [ $# = 2 ] ; then
 				if gunzip -t "$input" ; then
 					exec cp "$input" "$output"
 				else
-					echo "ERROR: Corrupted input (gzip) file!" 1>&2
+					echo "ERROR: Corrupted results (gzip) file!" 1>&2
 					exit 3
 				fi
 				;;
@@ -23,7 +23,7 @@ if [ $# = 2 ] ; then
 					bunzip2 -c "$input" | gzip -9c > "$output"
 					exit $?
 				else
-					echo "ERROR: Corrupted input (bzip2) file!" 1>&2
+					echo "ERROR: Corrupted results (bzip2) file!" 1>&2
 					exit 3
 				fi
 				;;
@@ -33,7 +33,7 @@ if [ $# = 2 ] ; then
 				;;
 		esac
 	else
-		echo "ERROR: input file is unreadable!" 1>&2
+		echo "ERROR: results file is unreadable!" 1>&2
 		exit 1
 	fi
 else

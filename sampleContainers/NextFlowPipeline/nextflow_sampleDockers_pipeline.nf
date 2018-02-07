@@ -31,9 +31,9 @@ process generateInput {
 /*
 * The instance generated from this docker file has to check the syntax of the submitted results.
 */
-process checkInput {
+process checkResuls {
 
-  container 'opeb-submission/sample-checkinput'
+  container 'opeb-submission/sample-checkresults'
 
   publishDir 'nextflow_working_directory', mode: 'copy', overwrite: true
 

@@ -4,7 +4,7 @@ Sample Dockers for the submission infrastucture
 These sample docker files show what a community have to provide in
 order to use the submission and evaluation infrastructure.
 
-* An __results validation docker__: The instance generated from this docker file
+* A __results validation docker__: The instance generated from this docker file
   has to check the syntax of the submitted results. Also, if the community uses
   several formats, and one or more are declared as canonical, the input has to be
   translated to one of those canonical formats (or copied, if no translation is
@@ -30,7 +30,7 @@ In order to test this proof of concept, you only have to follow next script:
   you have to run next commands in order to build the sample images:
 
   ```bash
-  docker build -t opeb-submission/sample-checkinput:latest CheckInput
+  docker build -t opeb-submission/sample-checkresults:latest CheckResults
   docker build -t opeb-submission/sample-getids:latest GetIds
   docker build -t opeb-submission/sample-linemetrics:latest LineMetrics
   docker build -t opeb-submission/sample-wordmetrics:latest WordMetrics
@@ -53,7 +53,7 @@ In order to test this proof of concept, you only have to follow next script:
       -v /tmp/input:/input:ro \
       -v /tmp/canonical_input:/output \
       -u $UID \
-      opeb-submission/sample-checkinput \
+      opeb-submission/sample-checkresults \
       /input/test_input.bz2  /output/canonical_input.gz
   ```
 
