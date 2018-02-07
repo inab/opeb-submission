@@ -10,7 +10,9 @@ Vagrant.configure('2') do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = 'ubuntu/xenial64'
   config.vm.provider 'virtualbox' do |v|
-    v.name = 'OpenEBench'
+    v.name   = 'OpenEBench'
+    v.memory = 4096
+    v.cpus   = 4
   end
 
   # load vm_config
