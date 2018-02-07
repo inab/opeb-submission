@@ -26,14 +26,14 @@ When one of the dockers fails, it should produce a UNIX exit code different from
 It is responsibility of the community to provide useful information regarding these errors, so their users are able to understand the problems found.
 Communities are compelled to define a structured error format, shared by all the used dockers.
 
-* An __input data validation docker__: This docker will check the syntax of the submitted results from users. If the community allows input in more than one format, this docker image has to translate this input file to the canonical format. This docker is responsible of checking common issues as format is not allowed or recognized, file is corrupted or it could not be translated to the canonical format.
+* A __results data validation docker__: This docker will check the syntax of the submitted results from participants. If the community allows results in more than one format, this docker image has to translate these results to the canonical format. This docker is responsible of checking common issues as format is not allowed or recognized, some file is corrupted or it could not be translated to the canonical format.
 
   *It is responsibility of the community to provide useful information regarding these errors, so their users are able to understand the problems found.*
 
-  * Input: Original User Input.
-  * Output: User Input in canonical format or error code and STDERR error message.
+  * Input: Original participant results.
+  * Output: Participant results in canonical format or error code and STDERR error message.
 
-* A __query IDs extraction docker__: This docker will extract IDs from the input sent to the participants, and it is run only once per test event.
+* A __query IDs extraction docker__: This docker will extract IDs from the query sent to the participants, and it is run only once per test event.
   The output of this docker should be a file in JSON format, containing a list of objects with the next structure:
 
   * *Input*: Query that will be sent to participants
