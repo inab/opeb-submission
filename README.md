@@ -21,8 +21,8 @@ Documentation available <https://inab.github.io/opeb-submission/>
 ```
 1. [Diagrams](#diagrams)
 2. [Docs](#docs)
-3. [SampleDockers](#sampledockers)
-4. [Scripts](#sampledockers)
+3. [SampleContainers](#samplecontainers)
+4. [Scripts](#scripts)
     - [SFTP](#sftp)
     - [Tests](#tests)
     - [VM](#vm)
@@ -34,8 +34,8 @@ Community and User workflow diagrams in graphml format
 <https://inab.github.io/opeb-submission/>
 
 Web page which contains all documentation about the OpeB Submission Protocol for users and communities
-## SampleDockers
-Docker example files to be implemented by communities
+## SampleContainers
+Container (docker) example files to be implemented by communities
 ## Scripts
 Script files for building and providing the different services
 ### SFTP
