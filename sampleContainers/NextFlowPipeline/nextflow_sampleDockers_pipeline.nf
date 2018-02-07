@@ -54,7 +54,7 @@ process checkResuls {
 */
 process getResultsIds {
 
-  container 'opeb-submission/sample-getiresultsids'
+  container 'opeb-submission/sample-getresultsids'
 
   publishDir 'nextflow_working_directory', mode: 'copy', overwrite: true
 
