@@ -4,13 +4,13 @@ Sample Dockers for the submission infrastucture
 These sample docker files show what a community have to provide in
 order to use the submission and evaluation infrastructure.
 
-* An __input validation docker__: The instance generated from this docker file
+* An __results validation docker__: The instance generated from this docker file
   has to check the syntax of the submitted results. Also, if the community uses
   several formats, and one or more are declared as canonical, the input has to be
   translated to one of those canonical formats (or copied, if no translation is
   needed).
 
-* A __input ids extraction docker__: The instance generated from this docker
+* A __results ids extraction docker__: The instance generated from this docker
   file knows how to extract input ids from their canonical formats. This step
   is needed in order to check whether the submission correlates to the query.
   This check is independent from the community, and it is done outside this docker
