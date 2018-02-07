@@ -1,4 +1,6 @@
-# <https://inab.github.io/opeb-submission/>
+# OpenEBench submission infrastructure
+
+Documentation available <https://inab.github.io/opeb-submission/>
 
 ## Repository's tree view
 ```
