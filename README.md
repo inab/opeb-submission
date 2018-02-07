@@ -5,7 +5,7 @@
 .
 ├── diagrams
 ├── docs
-├── sampleDockers
+├── sampleContainers
 │   ├── CheckInput
 │   ├── ConsolidateMetrics
 │   ├── GetIds

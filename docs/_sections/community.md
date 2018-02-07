@@ -5,7 +5,7 @@ description: Community instructions
 ---
 ## Community instructions
 
-Communities that aim to integrate with our pipeline for benchmarking should provide several information and docker images. We provide examples of these docker images using toy benchmarks, which are available under the repository folder 'sampleDockers'.
+Communities that aim to integrate with our pipeline for benchmarking should provide several information and docker images. We provide examples of these docker images using toy benchmarks, which are available under the repository folder 'sampleContainers'.
 
 ### Community workflow activity
 

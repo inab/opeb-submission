@@ -26,7 +26,7 @@ order to use the submission and evaluation infrastructure.
 
 In order to test this proof of concept, you only have to follow next script:
 
-1. Once you have cloned this repository, and you are in the `sampleDockers` directory,
+1. Once you have cloned this repository, and you are in the `sampleContainers` directory,
   you have to run next commands in order to build the sample images:
 
   ```bash
