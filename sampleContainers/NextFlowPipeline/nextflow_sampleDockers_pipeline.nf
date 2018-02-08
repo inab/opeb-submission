@@ -39,7 +39,7 @@ process generateInput {
   file results_bz2
 
   """
-  curl -s -o pre_input -X POST https://www.lipsum.com/feed/json -d "amount=50" -d "what=paragraphs"
+  curl -s -X POST https://www.lipsum.com/feed/json -d "amount=50" -d "what=paragraphs"  | tr '"' "'" > pre_input
   bzip2 -9c pre_input > results_bz2
   """
 

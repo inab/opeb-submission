@@ -50,8 +50,9 @@ In order to test this proof of concept, you only have to follow next script:
   and then compress it:
 
   ```bash
+  rm -rf /tmp/query /tmp/results /tmp/ids /tmp/metrics /tmp/consolidated_metrics
   mkdir -p /tmp/query /tmp/results /tmp/ids /tmp/canonical_results /tmp/metrics /tmp/consolidated_metrics
-  curl -s -o /tmp/query/test_query.txt -X POST https://www.lipsum.com/feed/json -d "amount=50" -d "what=paragraphs"
+  curl -s -X POST https://www.lipsum.com/feed/json -d "amount=50" -d "what=paragraphs" | tr '"' "'" > /tmp/query/test_query.txt
   bzip2 -9c /tmp/query/test_query.txt > /tmp/results/test_results.bz2
   ```
 
