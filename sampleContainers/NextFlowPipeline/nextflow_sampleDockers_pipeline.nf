@@ -5,10 +5,7 @@ vim: syntax=groovy
 -*- mode: groovy;-*-
 */
 
-params.pre_input = "/etc/passwd"
 params.testEventId = "123abc"
-
-pre_input = file(params.pre_input)
 
 /*
 * Assuring the preconditions (in this case, the docker images) are in place
@@ -36,13 +33,14 @@ process generateInput {
   publishDir 'nextflow_working_directory', mode: 'copy', overwrite: true
 
   input:
-  file pre_input
 
   output:
+  file pre_input
   file results_bz2
 
   """
-  bzip2 -9c $pre_input > results_bz2
+  curl -s -o pre_input -X POST https://www.lipsum.com/feed/json -d "amount=50" -d "what=paragraphs"
+  bzip2 -9c pre_input > results_bz2
   """
 
 }

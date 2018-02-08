@@ -46,12 +46,12 @@ In order to test this proof of concept, you only have to follow next script:
 
 2. Next, you have to prepare a query in order to feed the pipeline. As the results
   accepted as results by the community are compressed gz or bz2 archives from
-  query files (preferibly text ones), you can choose a text file you prefer as query,
+  query files (preferibly text ones), you can generate text from <https://www.lipsum.com>,
   and then compress it:
 
   ```bash
   mkdir -p /tmp/query /tmp/results /tmp/ids /tmp/canonical_results /tmp/metrics /tmp/consolidated_metrics
-4  cp /etc/passwd /tmp/query/test_query.txt
+  curl -s -o /tmp/query/test_query.txt -X POST https://www.lipsum.com/feed/json -d "amount=50" -d "what=paragraphs"
   bzip2 -9c /tmp/query/test_query.txt > /tmp/results/test_results.bz2
   ```
 
