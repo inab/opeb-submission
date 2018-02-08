@@ -5,7 +5,7 @@ vim: syntax=groovy
 -*- mode: groovy;-*-
 */
 
-params.pre_input = "/etc/profile"
+params.pre_input = "/etc/passwd"
 params.testEventId = "123abc"
 
 pre_input = file(params.pre_input)

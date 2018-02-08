@@ -51,7 +51,7 @@ In order to test this proof of concept, you only have to follow next script:
 
   ```bash
   mkdir -p /tmp/query /tmp/results /tmp/ids /tmp/canonical_results /tmp/metrics /tmp/consolidated_metrics
-  cp /etc/profile /tmp/query/test_query.txt
+4  cp /etc/passwd /tmp/query/test_query.txt
   bzip2 -9c /tmp/query/test_query.txt > /tmp/results/test_results.bz2
   ```
 
