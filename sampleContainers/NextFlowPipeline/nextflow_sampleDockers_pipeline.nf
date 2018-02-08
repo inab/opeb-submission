@@ -14,13 +14,17 @@ process dockerPreconditions {
 
   publishDir 'nextflow_working_directory', mode: 'copy', overwrite: true
 
+  output:
+    file docker_image_dependency
+
   """
-  docker build -t opeb-submission/sample-getqueryids:latest $PWD/GetQueryIds
-  docker build -t opeb-submission/sample-checkresults:latest $PWD/CheckResults
-  docker build -t opeb-submission/sample-getresultsids:latest $PWD/GetResultsIds
-  docker build -t opeb-submission/sample-linemetrics:latest $PWD/LineMetrics
-  docker build -t opeb-submission/sample-wordmetrics:latest $PWD/WordMetrics
-  docker build -t opeb-submission/sample-consolidate:latest $PWD/ConsolidateMetrics
+  docker build -t opeb-submission/sample-getqueryids:latest $PWD/../GetQueryIds
+  docker build -t opeb-submission/sample-checkresults:latest $PWD/../CheckResults
+  docker build -t opeb-submission/sample-getresultsids:latest $PWD/../GetResultsIds
+  docker build -t opeb-submission/sample-linemetrics:latest $PWD/../LineMetrics
+  docker build -t opeb-submission/sample-wordmetrics:latest $PWD/../WordMetrics
+  docker build -t opeb-submission/sample-consolidate:latest $PWD/../ConsolidateMetrics
+  touch docker_image_dependency
   """
 
 }
@@ -48,7 +52,7 @@ process generateInput {
 /*
 * The instance generated from this docker file has to check the syntax of the submitted results.
 */
-process checkResuls {
+process checkResults {
 
   container 'opeb-submission/sample-checkresults'
 
@@ -56,6 +60,7 @@ process checkResuls {
 
   input:
   file results_bz2
+  file docker_image_dependency
 
   output:
   file canonical_results_gz
@@ -77,6 +82,8 @@ process getQueryIds {
 
   input:
   file pre_input
+  file docker_image_dependency
+
 
   output:
   file query_ids_json
@@ -98,6 +105,7 @@ process getResultsIds {
 
   input:
   file canonical_results_gz
+  file docker_image_dependency
 
   output:
   file result_ids_json
@@ -119,6 +127,7 @@ process LineMetrics {
 
   input:
   file canonical_results_gz
+  file docker_image_dependency
 
   output:
   file metrics_linemetrics_json
@@ -140,6 +149,7 @@ process WordMetrics {
 
   input:
   file canonical_results_gz
+  file docker_image_dependency
 
   output:
   file metrics_wordmetrics_json
@@ -162,6 +172,7 @@ process ConsolidateMetrics {
   input:
   file metrics_linemetrics_json
   file metrics_wordmetrics_json
+  file docker_image_dependency
 
   output:
   file metrics_consolidated_json
