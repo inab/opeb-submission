@@ -2,8 +2,10 @@
   :sftp: true
   :tus: true
   :nextflow: true
+  :opeb_submission_api: true
 :test_flags:
   :sftp: true
   :tus: true
   :nextflow: true
+  :opeb_submission_api: true
 
