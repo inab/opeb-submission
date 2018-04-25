@@ -1,9 +1,11 @@
 :service_flags:
-  :sftp: true
-  :tus: true
+  :sftp: false
+  :tus: false
   :nextflow: true
+  :galaxy: false
 :test_flags:
   :sftp: true
   :tus: true
   :nextflow: true
+  :galaxy: true
 
