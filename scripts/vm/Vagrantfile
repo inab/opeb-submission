@@ -92,9 +92,13 @@ Vagrant.configure('2') do |config|
     add-apt-repository ppa:deadsnakes/ppa
     apt update
     apt install -y python3.6
+    ln -s python3.6 /usr/bin/python3
     curl https://bootstrap.pypa.io/get-pip.py | python3.6
     pip3 install pipenv
     [ -d opeb-submission-api ] || git clone https://github.com/inab/opeb-submission-api.git
+    cd opeb-submission-api
+    pipenv install --skip-lock
+    pipenv run ./api.py api
    EOF
   end
 
@@ -139,11 +143,8 @@ Vagrant.configure('2') do |config|
 
   if vm_config[:test_flags][:opeb_submission_api]
     config.vm.provision 'shell', inline: <<-EOF
-    # curl -vvv localhost:5000
     cd /home/vagrant/opeb-submission-api
-    # pipenv install -r requirements.txt
-    pipenv install
-    pipenv run ./api.py api
+    # TODO
     EOF
   end
 end
