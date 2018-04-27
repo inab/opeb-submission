@@ -3,9 +3,11 @@
   :tus: true
   :nextflow: true
   :opeb_submission_api: true
+  :mongodb: true
 :test_flags:
   :sftp: true
   :tus: true
   :nextflow: true
   :opeb_submission_api: true
+  :mongodb: true
 
