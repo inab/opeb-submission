@@ -1,0 +1,14 @@
+[Unit]
+Description=tus resumable upload protocol
+After=network.target auditd.service
+
+[Service]
+ExecStart=/usr/bin/tusd
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+RestartPreventExitStatus=255
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
