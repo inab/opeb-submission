@@ -126,8 +126,11 @@ Vagrant.configure('2') do |config|
 
   if vm_config[:test_flags][:tusd]
     config.vm.provision 'shell', inline: <<-EOF
-    cd /tmp/tests/guest/tusd
-    ./tusd.sh
+      apt install -y python3-pip jq
+      pip3 install tuspy
+      cd /tmp/tests/guest/tusd
+      echo "test" > test.txt
+      ./tusd.sh
     EOF
   end
 
