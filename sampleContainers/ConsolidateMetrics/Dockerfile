@@ -8,7 +8,7 @@ LABEL	description="Sample consolidation metrics" vendor="BSC-CNS" version="0.1" 
 # As this sample computes the number of lines and words of a compressed gzip, it
 # installs the two packages it needs
 # Bash is installed for systems like nextflow
-RUN	apk update && apk add jq bash
+RUN	apk add --no-cache jq bash
 
 
 # Now, we get the metrics computation program in some way (copying, git clone, etc...)

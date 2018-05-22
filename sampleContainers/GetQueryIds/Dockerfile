@@ -7,7 +7,7 @@ LABEL	description="Sample query ids extractor" vendor="BSC-CNS" version="0.1" ma
 # First, install all the dependencies needed by the query ids extraction procedure
 # In this case, it installs the only program it needs
 # Bash is installed for systems like nextflow
-RUN	apk update && apk add coreutils bash
+RUN	apk add --no-cache coreutils bash
 
 
 # Now, we get the query ids extraction program in some way (copying, git clone, etc...)

@@ -8,7 +8,7 @@ LABEL	description="Sample metrics: number of lines and words" vendor="BSC-CNS" v
 # As this sample computes the number of lines and words of a compressed gzip, it
 # installs the two packages it needs
 # Bash is installed for systems like nextflow
-RUN	apk update && apk add gzip coreutils bash
+RUN	apk add --no-cache gzip coreutils bash
 
 
 # Now, we get the metrics computation program in some way (copying, git clone, etc...)

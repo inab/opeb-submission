@@ -8,7 +8,7 @@ LABEL	description="Sample metrics: word distribution" vendor="BSC-CNS" version="
 # As this sample computes the number of lines of a compressed gzip, it installs
 # the three packages it needs
 # Bash is installed for systems like nextflow
-RUN	apk update && apk add bash gzip coreutils binutils bash
+RUN	apk add --no-cache bash gzip coreutils binutils bash
 
 
 # Now, we get the metrics computation program in some way (copying, git clone, etc...)
