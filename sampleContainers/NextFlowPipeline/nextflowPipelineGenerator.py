@@ -8,6 +8,7 @@ class NextflowConfigGenerator(ConfigParser):
         self.read(config_file)
         self.data_list = []
         self.string_phases = []
+        self.publishDir = 'nextflow_working_directory'
 
     def _generate_header(self):
         generated_strings = []
@@ -20,6 +21,7 @@ class NextflowConfigGenerator(ConfigParser):
     def _generate_dockerPreconditions(self):
         generated_string = []
         generated_string.append('process dockerPreconditions {')
+        generated_string.append(self._generate_publishDir())
         for section in self.sections():
             for image_name, path in self[section].items():
                 if path is None:
@@ -29,6 +31,9 @@ class NextflowConfigGenerator(ConfigParser):
                         f'\tdocker build -t {image_name} {path}')
         generated_string.append('}')
         self.string_phases.append('\n'.join(generated_string))
+
+    def _generate_publishDir(self):
+        return f"\tpublishDir '{self.publishDir}', mode: 'copy', overwrite: true"
 
     def __str__(self):
         if not self.string_phases:
