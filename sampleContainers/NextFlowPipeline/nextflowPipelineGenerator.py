@@ -48,7 +48,7 @@ class NextflowConfigGenerator(ConfigParser):
     def _generate_output_files(self, output_files):
         generated_list = []
         generated_list.append('output:')
-        if type(output_files) is not 'Array':
+        if not isinstance(output_files, list):
             output_files = [output_files]
         for output_file in output_files:
             generated_list.append(f'\tfile {output_file}')
