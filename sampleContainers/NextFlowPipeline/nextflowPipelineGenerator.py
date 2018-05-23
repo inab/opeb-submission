@@ -37,6 +37,17 @@ class NextflowConfigGenerator(ConfigParser):
     def _generate_publishDir(self):
         return f"\tpublishDir '{self.publishDir}', mode: 'copy', overwrite: true"
 
+    def _generate_output_files(self, output_files):
+        generated_list = []
+        generated_list.append('output:')
+        if type(output_files) is not 'Array':
+            output_files = [output_files]
+        for output_file in output_files:
+            generated_list.append(f'\tfile {output_file}')
+        generated_list.append('')
+
+        return '\n'.join(generated_list)
+
     def __str__(self):
         if not self.string_phases:
             self._generate_header()
