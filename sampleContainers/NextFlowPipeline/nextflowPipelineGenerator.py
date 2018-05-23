@@ -23,6 +23,8 @@ class NextflowConfigGenerator(ConfigParser):
         generated_string.append('process dockerPreconditions {')
         generated_string.append(self._generate_publishDir())
         for section in self.sections():
+            if section == 'InputData':
+                continue
             for image_name, path in self[section].items():
                 if path is None:
                     generated_string.append(f'\tdocker pull {image_name}')
