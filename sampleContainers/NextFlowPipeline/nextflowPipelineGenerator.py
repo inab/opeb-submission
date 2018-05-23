@@ -11,28 +11,28 @@ class NextflowConfigGenerator(ConfigParser):
         self.publishDir = 'nextflow_working_directory'
 
     def _generate_header(self):
-        generated_strings = []
-        generated_strings.append('#!/usr/bin/env nextflow')
+        generated_list = []
+        generated_list.append('#!/usr/bin/env nextflow')
         for data in self['InputData']:
             self.data_list.append(data)
-            generated_strings.append(f'params.in = "{data}"')
-        self.string_phases.append('\n'.join(generated_strings))
+            generated_list.append(f'params.in = "{data}"')
+        self.string_phases.append('\n'.join(generated_list))
 
     def _generate_dockerPreconditions(self):
-        generated_string = []
-        generated_string.append('process dockerPreconditions {')
-        generated_string.append(self._generate_publishDir())
+        generated_list = []
+        generated_list.append('process dockerPreconditions {')
+        generated_list.append(self._generate_publishDir())
         for section in self.sections():
             if section == 'InputData':
                 continue
             for image_name, path in self[section].items():
                 if path is None:
-                    generated_string.append(f'\tdocker pull {image_name}')
+                    generated_list.append(f'\tdocker pull {image_name}')
                 else:
-                    generated_string.append(
+                    generated_list.append(
                         f'\tdocker build -t {image_name} {path}')
-        generated_string.append('}')
-        self.string_phases.append('\n'.join(generated_string))
+        generated_list.append('}')
+        self.string_phases.append('\n'.join(generated_list))
 
     def _generate_publishDir(self):
         return f"\tpublishDir '{self.publishDir}', mode: 'copy', overwrite: true"
