@@ -21,7 +21,12 @@ class NextflowConfigGenerator(ConfigParser):
     def _generate_dockerPreconditions(self):
         generated_list = []
         generated_list.append('process dockerPreconditions {')
+        generated_list.append('')
         generated_list.append(self._generate_publishDir())
+        generated_list.append('')
+        generated_list.append(
+            self._generate_output_files('docker_image_dependency'))
+        generated_list.append('\t"""')
         for section in self.sections():
             if section == 'InputData':
                 continue
@@ -31,6 +36,9 @@ class NextflowConfigGenerator(ConfigParser):
                 else:
                     generated_list.append(
                         f'\tdocker build -t {image_name} {path}')
+        generated_list.append('')
+        generated_list.append('\ttouch docker_image_dependency')
+        generated_list.append('\t"""')
         generated_list.append('}')
         self.string_phases.append('\n'.join(generated_list))
 
