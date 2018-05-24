@@ -6,55 +6,56 @@ class NextflowConfigGenerator(ConfigParser):
     def __init__(self, config_file):
         ConfigParser.__init__(self, allow_no_value=True)
         self.read(config_file)
-        self.input_data_list = []
+        self.input_data = []
         self.string_phases = []
         self.publishDir = 'nextflow_working_directory'
 
     def _generate_header(self):
-        generated_list = []
-        generated_list.append('#!/usr/bin/env nextflow')
+        generated_lines = []
+        generated_lines.append('#!/usr/bin/env nextflow')
+        generated_lines.append('')
         for data in self['InputData']:
-            self.input_data_list.append(data)
-            generated_list.append(f'params.in = "{data}"')
-        self.string_phases.append('\n'.join(generated_list))
+            self.input_data.append(data)
+            generated_lines.append(f'params.in = "{data}"')
+        self.string_phases.append('\n'.join(generated_lines))
 
     def _generate_dockerPreconditions(self):
-        generated_list = []
-        generated_list.append('process dockerPreconditions {')
-        generated_list.append('')
-        generated_list.append(self._generate_publishDir())
-        generated_list.append('')
-        generated_list.append(
+        generated_lines = []
+        generated_lines.append('process dockerPreconditions {')
+        generated_lines.append('')
+        generated_lines.append(self._generate_publishDir())
+        generated_lines.append('')
+        generated_lines.append(
             self._generate_files('docker_image_dependency', mode='input'))
-        generated_list.append('\t"""')
+        generated_lines.append('\t"""')
         for section in self.sections():
             if section == 'InputData':
                 continue
             for image_name, path in self[section].items():
                 if path is None:
-                    generated_list.append(f'\tdocker pull {image_name}')
+                    generated_lines.append(f'\tdocker pull {image_name}')
                 else:
-                    generated_list.append(
+                    generated_lines.append(
                         f'\tdocker build -t {image_name} {path}')
-        generated_list.append('')
-        generated_list.append('\ttouch docker_image_dependency')
-        generated_list.append('\t"""')
-        generated_list.append('}')
-        self.string_phases.append('\n'.join(generated_list))
+        generated_lines.append('')
+        generated_lines.append('\ttouch docker_image_dependency')
+        generated_lines.append('\t"""')
+        generated_lines.append('}')
+        self.string_phases.append('\n'.join(generated_lines))
 
     def _generate_publishDir(self):
         return f"\tpublishDir '{self.publishDir}', mode: 'copy', overwrite: true"
 
     def _generate_files(self, files, mode='input'):
-        generated_list = []
-        generated_list.append(f'{"input" if mode == "input" else "output"}:')
+        generated_lines = []
+        generated_lines.append(f'{"input" if mode == "input" else "output"}:')
         if not isinstance(files, list):
             files = [files]
         for file in files:
-            generated_list.append(f'\tfile {file}')
-        generated_list.append('')
+            generated_lines.append(f'\tfile {file}')
+        generated_lines.append('')
 
-        return '\n'.join(generated_list)
+        return '\n'.join(generated_lines)
 
     def __str__(self):
         if not self.string_phases:
