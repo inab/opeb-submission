@@ -7,12 +7,18 @@ class NextflowConfigGenerator(ConfigParser):
         ConfigParser.__init__(self, allow_no_value=True)
         self.read(config_file)
         self.input_data = []
+        self.paremeters = {}
         self.string_phases = []
         self.publishDir = 'nextflow_working_directory'
 
     def _generate_header(self):
         generated_lines = []
         generated_lines.append('#!/usr/bin/env nextflow')
+        generated_lines.append('')
+        for parameter in self['Parameters']:
+            value = self['Parameters'][parameter]
+            self.paremeters[parameter] = value
+            generated_lines.append(f'params.{parameter} = "{value}"')
         generated_lines.append('')
         for data in self['InputData']:
             self.input_data.append(data)
@@ -29,7 +35,7 @@ class NextflowConfigGenerator(ConfigParser):
             self._generate_files('docker_image_dependency', mode='input'))
         generated_lines.append('\t"""')
         for section in self.sections():
-            if section == 'InputData':
+            if section in ['Parameters', 'InputData']:
                 continue
             for image_name, path in self[section].items():
                 if path is None:
