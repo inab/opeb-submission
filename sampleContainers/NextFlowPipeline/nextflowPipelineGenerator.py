@@ -6,7 +6,7 @@ class NextflowConfigGenerator(ConfigParser):
     def __init__(self, config_file):
         ConfigParser.__init__(self, allow_no_value=True)
         self.read(config_file)
-        self.data_list = []
+        self.input_data_list = []
         self.string_phases = []
         self.publishDir = 'nextflow_working_directory'
 
@@ -14,7 +14,7 @@ class NextflowConfigGenerator(ConfigParser):
         generated_list = []
         generated_list.append('#!/usr/bin/env nextflow')
         for data in self['InputData']:
-            self.data_list.append(data)
+            self.input_data_list.append(data)
             generated_list.append(f'params.in = "{data}"')
         self.string_phases.append('\n'.join(generated_list))
 
@@ -25,7 +25,7 @@ class NextflowConfigGenerator(ConfigParser):
         generated_list.append(self._generate_publishDir())
         generated_list.append('')
         generated_list.append(
-            self._generate_output_files('docker_image_dependency'))
+            self._generate_files('docker_image_dependency', mode='input'))
         generated_list.append('\t"""')
         for section in self.sections():
             if section == 'InputData':
@@ -45,13 +45,13 @@ class NextflowConfigGenerator(ConfigParser):
     def _generate_publishDir(self):
         return f"\tpublishDir '{self.publishDir}', mode: 'copy', overwrite: true"
 
-    def _generate_output_files(self, output_files):
+    def _generate_files(self, files, mode='input'):
         generated_list = []
-        generated_list.append('output:')
-        if not isinstance(output_files, list):
-            output_files = [output_files]
-        for output_file in output_files:
-            generated_list.append(f'\tfile {output_file}')
+        generated_list.append(f'{"input" if mode == "input" else "output"}:')
+        if not isinstance(files, list):
+            files = [files]
+        for file in files:
+            generated_list.append(f'\tfile {file}')
         generated_list.append('')
 
         return '\n'.join(generated_list)
