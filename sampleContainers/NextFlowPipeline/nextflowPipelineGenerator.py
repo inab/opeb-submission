@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from configparser import ConfigParser
+import subprocess
 
 
 class NextflowConfigGenerator(ConfigParser):
@@ -67,7 +68,7 @@ class NextflowConfigGenerator(ConfigParser):
         generated_lines.append('')
         generated_lines.append('\t"""')
         generated_lines.append(
-            f' \tdoValidateAndCopy.sh {" ".join((map(lambda l: "$"+l, self.input_data)))} canonical_results')
+            f' \t{self._generate_docker_entrypoint(docker_image, self["CheckResults"][docker_image])} {" ".join((map(lambda l: "$"+l, self.input_data)))} canonical_results')
         generated_lines.append('\t"""')
         generated_lines.append('}')
 
@@ -89,6 +90,15 @@ class NextflowConfigGenerator(ConfigParser):
 
     def _generate_docker_container(self, image):
         return f"container '{image}'"
+
+    def _generate_docker_entrypoint(self, image, path):
+        cmd = r"tac ../CheckResults/Dockerfile | grep -m1 -P -o 'ENTRYPOINT\s+\[\"\K[-_/.a-zA-Z0-9]+' | head -1"
+        process = subprocess.Popen(cmd, shell=True,
+                                   stdout=subprocess.PIPE,                                   stderr=subprocess.PIPE)
+        out, _err = process.communicate()
+        # errcode = process.returncode
+        output = out.strip().decode("utf-8")
+        return output
 
     def __str__(self):
         if not self.string_phases:
