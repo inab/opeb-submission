@@ -51,7 +51,11 @@ class NextflowConfigGenerator(ConfigParser):
 
     def _generate_checkResults(self):
         generated_lines = []
+        docker_image = next(iter(self['CheckResults']))
         generated_lines.append('process checkResults {')
+        generated_lines.append('')
+        generated_lines.append(
+            self._generate_docker_container(docker_image))
         generated_lines.append('')
         generated_lines.append(self._generate_publishDir())
         generated_lines.append('')
@@ -82,6 +86,9 @@ class NextflowConfigGenerator(ConfigParser):
         generated_lines.append('')
 
         return '\n'.join(generated_lines)
+
+    def _generate_docker_container(self, image):
+        return f"container '{image}'"
 
     def __str__(self):
         if not self.string_phases:
