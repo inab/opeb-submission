@@ -70,7 +70,7 @@ class NextflowConfigGenerator(ConfigParser):
         self.string_phases.append('\n'.join(generated_lines))
 
     def _generate_publishDir(self):
-        return f"\tpublishDir '{self.publishDir}', mode: 'copy', overwrite: true"
+        return f"publishDir '{self.publishDir}', mode: 'copy', overwrite: true"
 
     def _generate_files(self, files, mode='input'):
         generated_lines = []
